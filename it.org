@@ -1,0 +1,9 @@
+* refs
+** comp
+https://github.com/comp-org/comp/blob/master/docs/ENDPOINTS.md
+** matchups, a baseball model
+https://github.com/hdoupe/Matchups
+* questions
+** should I send python code to execute the docker container
+* ideas
+** captcha
