@@ -1,0 +1,27 @@
+Hi Hank! How's it going?
+
+I've dug into COMP and Matchups a little, and I've got more questions.
+
+# The README.md and DATABASE.md documents for comp
+https://github.com/comp-org/comp
+refer often to a database. What is it a database of? Is it baseball stats, or more generally the data used by apps? Or is it the apps themselves?
+
+# I still don't understand the meta-- vs. model parameter distinction. I mean vaguely I do, but not in terms of how their use differs in the program. Is it that the meta parameters influence the set of defaults presented to the viewer? Do meta-parameters reach COMP but not get passed through to the app it's serving, while model parameters do?
+
+In Matchups, I see metaparameters described in schema.json, and model parameters in defaults.json. But that's an immaterial distinction, right? COMP just wants some json returned by the Python interface functions, and doesn't care where that JSON came from, correct?
+
+# Does spelling matter?
+In Matchups/matchups/defaults.json, under the "pitcher" field, there appears this note:
+"Make sure the name of the pitcher is correct. A good place to reference this is baseball-reference.com",
+
+That is followed by a validator that lists peoples' names. Does the validator obsolete the note?
+
+# Are duplicates meaningful in a validator?
+That same pitcher validator includes duplicates, e.g. three people named Bob Adams (and another named Bobby). Does each of those duplicate strings somehow represent a separate person?
+
+# Sometimes the name compbaseball is referred to. Is that name obsolete, replaced by matchups?
+
+# Does the "install instructions" section of the COMP readme indicate how to actually serve a webpage like https://www.compmodels.com/? (I can't imagine what else it would do, but I don't want to go through the work of installing it before knowing I'm doing it.)
+
+Thanks for your help!
+Jeff

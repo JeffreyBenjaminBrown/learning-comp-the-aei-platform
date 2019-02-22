@@ -1,0 +1,26 @@
+* refs
+** comp
+https://github.com/comp-org/comp
+** matchups, a baseball model
+https://github.com/hdoupe/Matchups
+* questions
+** asked, unanswered
+*** a database of what? apps? baseball stats?
+ in the README.md and DATABASE.md documents for comp
+ https://github.com/comp-org/comp
+*** meta- vs. model parameters
+ One should be described in schema.json, the other in defaults.json? But those files seem not to matter; COMP just wants some json returned by the Python interface functions, correct?
+ Is the distinction that the meta parameters affect the set of defaults presented to the viewer?
+*** does spelling matter?
+ In Matchups/matchups/defaults.json, under the "pitcher" field there appears this note:
+ "Make sure the name of the pitcher is correct. A good place to reference this is baseball-reference.com",
+ That is followed by a validator that lists peoples' names. Does the validator obsolete the note?
+*** Are duplicates meaningful in a validator?
+ The pitcher validator includes duplicates, e.g. three people named Bob Adams. Does each of those duplicate strings somehow represent a separate person?
+*** sometimes the name compbaseball is referred to
+ Is that name obsolete, replaced by matchups?
+*** can I run a duplicate of COMP?
+ Does the "install instructions" section of the COMP readme indicate how to actually serve a webpage like https://www.compmodels.com/? (I can't imagine what else it would do, but I don't want to go through the work of installing it before knowing I'm doing it.)
+** should I send python code to execute the docker container
+* ideas
+** captcha
