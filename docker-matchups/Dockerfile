@@ -34,6 +34,7 @@ RUN conda update -n base conda                   && \
 RUN git clone https://github.com/hdoupe/Matchups && \
     conda install pandas pyarrow bokeh           && \
     pip install pybaseball compbaseball
+RUN pip install paramtools
 
 EXPOSE 8888
 

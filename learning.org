@@ -21,6 +21,59 @@ https://github.com/hdoupe/Matchups
  Is that name obsolete, replaced by matchups?
 *** can I run a duplicate of COMP?
  Does the "install instructions" section of the COMP readme indicate how to actually serve a webpage like https://www.compmodels.com/? (I can't imagine what else it would do, but I don't want to go through the work of installing it before knowing I'm doing it.)
-** should I send python code to execute the docker container
+*** why is the number_dims field 1 for batters but 0 for pitchers?
+*** I can't run get_inputs() from the git repo, but I can from the pip-installed code
+
+ >>> from compbaseball import baseball
+ >>> baseball.get_inputs()
+ ... ( Some JSON appears. ) ...
+
+ >>> import matchups.matchups as bb
+ >>> bb.get_inputs()
+ Traceback (most recent call last):
+   File "<stdin>", line 1, in <module>
+   File "/mnt/matchups/matchups/matchups.py", line 20, in get_inputs
+     params = MatchupsParams()
+   File "/opt/conda/lib/python3.6/site-packages/paramtools/parameters.py", line 28, in __init__
+     defaults, self._validator_schema = sb.build_schemas()
+   File "/opt/conda/lib/python3.6/site-packages/paramtools/build_schema.py", line 72, in build_schemas
+     cleaned_defaults = param_schema.load(self.defaults)
+   File "/opt/conda/lib/python3.6/site-packages/marshmallow/schema.py", line 706, in load
+     postprocess=True,
+   File "/opt/conda/lib/python3.6/site-packages/marshmallow/schema.py", line 866, in _do_load
+     raise exc
+ marshmallow.exceptions.ValidationError: {'start_date': {'value': {0: {'value': ['Not a valid date.']}, 1: {'value': ['Not a valid date.']}}}, 'end_date': {'value': {0: {'value': ['Not a valid date.']}, 1: {'value': ['Not a valid date.']}}}}
+ >>>
+
+I thought the problem might be that it's not finding the .json files referred to in MatchupsParams:
+
+    class MatchupsParams(Parameters):
+        schema = os.path.join(CURRENT_PATH, "schema.json")
+        defaults = os.path.join(CURRENT_PATH, "defaults.json")
+
+because CURRENT_PATH is not defined in the REPL, so I tried changing that to this:
+
+    class MatchupsParams(Parameters):
+        schema = "schema.json"
+        defaults = "defaults.json"
+
+and copying those two files to the root of my Matchups clone, and restarting the REPL, but I still got the same error. I also tried
+
+    class MatchupsParams(Parameters):
+        schema = "matchups/schema.json"
+        defaults = "matchups/defaults.json"
+
+and even
+
+    class MatchupsParams(Parameters):
+        schema = os.path.join( os.getcwd(), "matchups", "schema.json" )
+        defaults = os.path.join( os.getcwd(), "matchups", "defaults.json" )
+
+but again to no new effect.
+
+** unsure whether to send
+*** the code appears not to correspond to the program output
+ For instance, when I run the model at "https://www.compmodels.com/hdoupe/matchups/", one window reads "Proportion of pitch type by count". But if I grep my clone of the matchups repo for the word "Proportion"
+*** should I send python code to execute the docker container
 * ideas
 ** captcha
