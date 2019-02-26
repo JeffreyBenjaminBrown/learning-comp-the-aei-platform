@@ -7,4 +7,4 @@ docker build -f Dockerfile -t                           \
 
 sudo docker run --name matchups -it -v /home/jeff/comp-aei:/mnt    \
   -p 8889:8888 -d -h 127.0.0.1                                     \
-  jeffreybbrown/matchups-aei
+  jeffreybbrown/matchups-aei:latest

@@ -1,0 +1,65 @@
+Hello again!
+
+
+--------------------------------------------------------------------------------
+
+> Batters can be a list (i.e. multiple batters), but only one pitcher is allowed.
+
+Aha! That makes sense.
+
+--------------------------------------------------------------------------------
+
+> Can you try upgrading to Matchups 0.3.6 and ParamTools 0.3.2?
+> This should work for pip and source install from the git repo.
+
+I ran these things:
+    pip install paramtools --upgrade
+    pip install -U matchups
+    pip install -r requirements.txt
+
+pip now shows that paramtools is at 0.3.3 and matchups at 0.3.6. Is 0.3.3 too high a version for paramtools?
+
+When i run py.test I get a lot of "Not a valid date" errors. That's the only kind of error I'm seeing, although I don't have a good way to check for others, because when I grep for the word "error" lots of code about errors that is not itself an error comes up.
+
+
+--------------------------------------------------------------------------------
+
+Does installing matchups via pip accomplish something that could not be accomplished by simply importing the code from a clone of the repo?
+
+
+--------------------------------------------------------------------------------
+
+The README.md and DATABASE.md documents for comp
+https://github.com/comp-org/comp
+refer often to a database. What is it a database of? Is it baseball stats, or more generally the data used by apps? Or is it the apps themselves?
+
+
+--------------------------------------------------------------------------------
+
+I still don't understand the meta-- vs. model parameter distinction. I mean vaguely I do, but not in terms of how their use differs in the program. Is it that the meta parameters influence the set of defaults presented to the viewer? Do meta-parameters reach COMP but not get passed through to the app it's serving, while model parameters do?
+
+In Matchups, I see metaparameters described in schema.json, and model parameters in defaults.json. But that's an immaterial distinction, right? COMP just wants some json returned by the Python interface functions, and doesn't care where that JSON came from, correct?
+
+
+--------------------------------------------------------------------------------
+
+Is there a way to create a dropdown menu from a list of strings?
+
+
+--------------------------------------------------------------------------------
+
+Are duplicates meaningful in a validator? The pitcher validator, for instance, includes duplicates, e.g. three people named Bob Adams (and another Bobby Adams).
+
+
+--------------------------------------------------------------------------------
+
+Sometimes the name compbaseball is referred to. Is that name obsolete, replaced by matchups?
+
+
+--------------------------------------------------------------------------------
+
+Does the "install instructions" section of the COMP readme indicate how to actually serve a webpage like https://www.compmodels.com/? (I can't imagine what else it would do, but I don't want to go through the work of installing it before knowing I'm doing it.)
+
+
+Thanks again, Hank, for all your help!
+Jeff
