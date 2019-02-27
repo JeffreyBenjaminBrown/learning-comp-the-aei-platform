@@ -1,3 +1,7 @@
+####################################################################
+#### The first section of this is based on, and maybe identical to, continuum/anaconda3
+####################################################################
+
 FROM debian:latest
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
@@ -22,15 +26,22 @@ RUN apt-get install -y curl grep sed dpkg && \
     apt-get clean
 
 
-# here the Dockerfile starts deviating from continuum/anaconda3
+####################################################################
+#### here the Dockerfile starts deviating from continuum/anaconda3
+####################################################################
+
 RUN apt install -y make                          && \
     /opt/conda/bin/conda install jupyter -y --quiet
 
-# These updates were suggested in the terminal output while running this file
+#### These updates were suggested in the terminal output while running this file
 RUN conda update -n base conda                   && \
     pip install --upgrade pip
 
-# Install Matchups
+
+####################################################################
+#### Install Matchups
+####################################################################
+
 RUN git clone https://github.com/hdoupe/Matchups && \
     conda install pandas pyarrow bokeh           && \
     pip install pybaseball compbaseball
