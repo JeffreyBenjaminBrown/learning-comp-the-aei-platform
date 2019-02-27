@@ -34,7 +34,12 @@ RUN conda update -n base conda                   && \
 RUN git clone https://github.com/hdoupe/Matchups && \
     conda install pandas pyarrow bokeh           && \
     pip install pybaseball compbaseball
-RUN pip install paramtools
+RUN pip install paramtools python-dateutil && \
+    pip install paramtools --upgrade       && \
+    pip install -U matchups
+RUN cd /Matchups && git pull && \
+    pip install -r /Matchups/requirements.txt
+
 
 EXPOSE 8888
 
