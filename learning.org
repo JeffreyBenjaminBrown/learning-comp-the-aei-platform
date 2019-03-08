@@ -4,6 +4,9 @@ https://github.com/comp-org/comp
 ** matchups, a baseball model
 https://github.com/hdoupe/Matchups
 * questions
+** asked, answered
+*** why is the number_dims field 1 for batters but 0 for pitchers?
+There can be multiple batters.
 ** asked, unanswered
 *** a database of what? apps? baseball stats?
  in the README.md and DATABASE.md documents for comp
@@ -18,10 +21,9 @@ https://github.com/hdoupe/Matchups
 *** Are duplicates meaningful in a validator?
  The pitcher validator includes duplicates, e.g. three people named Bob Adams. Does each of those duplicate strings somehow represent a separate person?
 *** sometimes the name compbaseball is referred to
- Is that name obsolete, replaced by matchups?
+ Is that name obsolete, replaced by matchups? Is compbaseball what's in the pip repository, whereas matchups is what to call it if you're installing from a git clone?
 *** can I run a duplicate of COMP?
  Does the "install instructions" section of the COMP readme indicate how to actually serve a webpage like https://www.compmodels.com/? (I can't imagine what else it would do, but I don't want to go through the work of installing it before knowing I'm doing it.)
-*** why is the number_dims field 1 for batters but 0 for pitchers?
 *** I can't run get_inputs() from the git repo, but I can from the pip-installed code
 
  >>> from compbaseball import baseball
@@ -71,8 +73,6 @@ and even
 
 but again to no new effect.
 
-** pip warned me
-paramtools 0.3.3 has requirement marshmallow>=3.*, but you'll have marshmallow 2.18.1 which is incompatible.
 ** unsure whether to send
 *** the code appears not to correspond to the program output
  For instance, when I run the model at "https://www.compmodels.com/hdoupe/matchups/", one window reads "Proportion of pitch type by count". But if I grep my clone of the matchups repo for the word "Proportion"
