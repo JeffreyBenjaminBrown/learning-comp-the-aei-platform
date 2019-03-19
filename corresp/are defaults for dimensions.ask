@@ -1,0 +1,5 @@
+send, March 18, 2019
+
+The documentation for ParamTools
+  https://paramtools.readthedocs.io/en/latest/spec.html#default-specification
+says that the Specification Schema is used to "Define the dimensions of the parameter space", and that the Default Specification is used to "Define the default values of the project”s parameter space". It gives an example Default Spec for which the first entry is "standard_deduction", and an example Specification Schema which does not mention "standard_deduction". Is that because the two examples are from two different projects, or is it the case that something can have a default without being mentioned in the Specification Schema?

@@ -5,6 +5,6 @@ docker build -f Dockerfile -t                           \
   jeffreybbrown/matchups-aei .                          \
   | tee logs/"build-log.`date`.txt"
 
-docker run --name matchups -it -v /home/jeff/javeriana/comp-aei:/mnt    \
-  -p 8889:8888 -d -h 127.0.0.1                                          \
+docker run --name matchups -it -v /home/jeff/comp-aei:/mnt    \
+  -p 8889:8888 -d -h 127.0.0.1                                \
   hdoupe/matchups

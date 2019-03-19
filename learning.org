@@ -3,79 +3,70 @@
 https://github.com/comp-org/comp
 ** matchups, a baseball model
 https://github.com/hdoupe/Matchups
-* questions
+* matchups
+** notes
+*** defaults
+The 'description" and "notes" fields are appended in the UI, in that order, to become the message displayed when you hover over the "info" icon.
 ** asked, answered
 *** why is the number_dims field 1 for batters but 0 for pitchers?
 There can be multiple batters.
-** asked, unanswered
 *** a database of what? apps? baseball stats?
- in the README.md and DATABASE.md documents for comp
+**** answer: don't worry about it
+The database is just the postgres database that powers the COMP website. As a model publishing an app with COMP, you shouldn't have to worry about the database. 
+**** question: more detail
+in the README.md and DATABASE.md documents for comp
  https://github.com/comp-org/comp
+
+*** does spelling matter?
+**** answer: yes
+The reason Matchups asks the user to spell it right is that the list of names is too long for selecting from a dropdown to be convenient.
+**** question: more detail
+In Matchups/matchups/defaults.json, under the "pitcher" field there appears this note:
+"Make sure the name of the pitcher is correct. A good place to reference this is baseball-reference.com"
+That is followed by a validator that lists peoples' names. Does the validator obsolete the note?
+*** Duplicates are meaningless in a validator
+*** The name "compbaseball" is obsolete, replaced by "matchups".
+** partially answered, to study
 *** meta- vs. model parameters
+**** what do they do?
+***** answer
+the meta parameters are passed to these three things
+  the package defaults function
+    https://github.com/comp-org/comp/blob/master/docs/ENDPOINTS.md#package-defaults
+  the parse user adjustments function
+    https://github.com/comp-org/comp/blob/master/docs/ENDPOINTS.md#parse-user-adjustemnts
+  the run simulation function
+    https://github.com/comp-org/comp/blob/master/docs/ENDPOINTS.md#run-simulation
+***** question: more detail
  One should be described in schema.json, the other in defaults.json? But those files seem not to matter; COMP just wants some json returned by the Python interface functions, correct?
  Is the distinction that the meta parameters affect the set of defaults presented to the viewer?
-*** does spelling matter?
- In Matchups/matchups/defaults.json, under the "pitcher" field there appears this note:
- "Make sure the name of the pitcher is correct. A good place to reference this is baseball-reference.com",
- That is followed by a validator that lists peoples' names. Does the validator obsolete the note?
-*** Are duplicates meaningful in a validator?
- The pitcher validator includes duplicates, e.g. three people named Bob Adams. Does each of those duplicate strings somehow represent a separate person?
-*** sometimes the name compbaseball is referred to
- Is that name obsolete, replaced by matchups? Is compbaseball what's in the pip repository, whereas matchups is what to call it if you're installing from a git clone?
+**** where do they come from?
+***** matchups uses ParamTools; COMP doesn't need it
+ParamTools is what expects schema.json and defaults.json files.
+***** question: more detail
+In Matchups, I see metaparameters described in schema.json, and model parameters in defaults.json. But that's an immaterial distinction, right? COMP just wants some json returned by the Python interface functions, and doesn't care where that JSON came from, correct?
 *** can I run a duplicate of COMP?
- Does the "install instructions" section of the COMP readme indicate how to actually serve a webpage like https://www.compmodels.com/? (I can't imagine what else it would do, but I don't want to go through the work of installing it before knowing I'm doing it.)
-*** I can't run get_inputs() from the git repo, but I can from the pip-installed code
-
- >>> from compbaseball import baseball
- >>> baseball.get_inputs()
- ... ( Some JSON appears. ) ...
-
- >>> import matchups.matchups as bb
- >>> bb.get_inputs()
- Traceback (most recent call last):
-   File "<stdin>", line 1, in <module>
-   File "/mnt/matchups/matchups/matchups.py", line 20, in get_inputs
-     params = MatchupsParams()
-   File "/opt/conda/lib/python3.6/site-packages/paramtools/parameters.py", line 28, in __init__
-     defaults, self._validator_schema = sb.build_schemas()
-   File "/opt/conda/lib/python3.6/site-packages/paramtools/build_schema.py", line 72, in build_schemas
-     cleaned_defaults = param_schema.load(self.defaults)
-   File "/opt/conda/lib/python3.6/site-packages/marshmallow/schema.py", line 706, in load
-     postprocess=True,
-   File "/opt/conda/lib/python3.6/site-packages/marshmallow/schema.py", line 866, in _do_load
-     raise exc
- marshmallow.exceptions.ValidationError: {'start_date': {'value': {0: {'value': ['Not a valid date.']}, 1: {'value': ['Not a valid date.']}}}, 'end_date': {'value': {0: {'value': ['Not a valid date.']}, 1: {'value': ['Not a valid date.']}}}}
- >>>
-
-I thought the problem might be that it's not finding the .json files referred to in MatchupsParams:
-
-    class MatchupsParams(Parameters):
-        schema = os.path.join(CURRENT_PATH, "schema.json")
-        defaults = os.path.join(CURRENT_PATH, "defaults.json")
-
-because CURRENT_PATH is not defined in the REPL, so I tried changing that to this:
-
-    class MatchupsParams(Parameters):
-        schema = "schema.json"
-        defaults = "defaults.json"
-
-and copying those two files to the root of my Matchups clone, and restarting the REPL, but I still got the same error. I also tried
-
-    class MatchupsParams(Parameters):
-        schema = "matchups/schema.json"
-        defaults = "matchups/defaults.json"
-
-and even
-
-    class MatchupsParams(Parameters):
-        schema = os.path.join( os.getcwd(), "matchups", "schema.json" )
-        defaults = os.path.join( os.getcwd(), "matchups", "defaults.json" )
-
-but again to no new effect.
-
+**** partial answer
+The install instructions allow you to run a local instance of comp. It'll be served locally at http://127.0.0.1:8000/. You are welcome to spin up a local instance of COMP and see how things look. A few of my friends have been able to get it running locally with minimal help. So, it can be done, but it's definitely not required. You can just fill out the publishing template, I'll plug everything in for you, and I'll push it to a demo server for your review.
+**** question, detail
+Does the "install instructions" section of the COMP readme indicate how to actually serve a webpage like https://www.compmodels.com/? (I can't imagine what else it would do, but I don't want to go through the work of installing it before knowing I'm doing it.)
 ** unsure whether to send
 *** the code appears not to correspond to the program output
- For instance, when I run the model at "https://www.compmodels.com/hdoupe/matchups/", one window reads "Proportion of pitch type by count". But if I grep my clone of the matchups repo for the word "Proportion"
+For instance, when I run the model at "https://www.compmodels.com/hdoupe/matchups/", one window reads "Proportion of pitch type by count". But if I grep my clone of the matchups repo for the word "Proportion"
 *** should I send python code to execute the docker container
-* ideas
-** captcha
+* ParamTools
+** optional dimensions can have dimension zero?
+e.g. from the the example at
+    https://paramtools.readthedocs.io/en/latest/spec.html#specification-schema
+there's
+    "section_3": {"type": "str", "number_dims": 0},
+** questions
+*** what is array_first?
+And why is it both global to the Parameters class (#1 below) and local to a particular instance of Parameters (#2 below)?
+
+class Parameters:
+    ...
+    array_first = False # 1
+
+    def __init__( self, initial_state=None ... # 2
+
