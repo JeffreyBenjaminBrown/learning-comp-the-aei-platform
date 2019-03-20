@@ -70,3 +70,4 @@ class Parameters:
 
     def __init__( self, initial_state=None ... # 2
 
+*** how can a schema (e.g. behresp) have no dimensions, yet default values?
