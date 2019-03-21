@@ -4,6 +4,55 @@ https://github.com/comp-org/comp
 ** matchups, a baseball model
 https://github.com/hdoupe/Matchups
 * talking to hank 2019 03 21
+** dimensions are labels for values
+No label needed if the value doesn't vary.
+*** One parameter can depend on another for validation.
+        "validators": {
+            "range": {
+                "min": 0,
+                "max": "ii_bracket_2"
+            }
+        }
+    },
+    "ii_bracket_2": {
+*** ii_bracket_1 is a parameter that depends on stuff, defined in "value" under it
+*** dimensions are separate from, and determine, parameters
+*** value under a parameter is a list of dicts; value under one of those dicts is a function output, where the inputs are tagged by the other keys in the dict
+** parameters are defined by the defaults file
+at the top level
+and they couldn't be deduced from the schema file
+** the schema file defines one schema
+dims defines dims of parameters; optional defines attributes about parameters.
+dims determine parameters; optionals don't.
+** number_dims
+This corresponds to numpy.ndarray.ndim
+Here's where it's 0 (this is real):
+        "number_dims": 0,
+        "value": [
+            {"year": 2024, "marital_status": "single", "value": 13673.68},
+it's 0 because the inner "value" is only one number.
+
+If instead it was
+        "number_dims": 0,
+        "value": [
+            {"year": 2024, "marital_status": "single"
+            , "value": [13673.68,2,3]},
+then number_dimns would be 1.
+** section_1 in taxparams-demo
+groups the parameters into sections
+** the required attributes of a parameter
+*** are defined here: https://paramtools.readthedocs.io/en/latest/spec.html#parameter-object
+*** are these
+“param_name”: The name of the parameter as it is used in the modeling project.
+“title”: “title”: A human readable name for the parameter.
+“description”: Describes the parameter.
+“notes”: Additional advice or information.
+“type”: Data type of the parameter. See Type property.
+“number_dims”: Number of dimensions of the parameter. See Number-Dimensions property
+“value”: A list of Value objects.
+“validators”: A mapping of Validator objects.
+“out_of_range_{min/max/other op}_msg”: Extra information to be used in the message(s) that will be displayed if the parameter value is outside of the specified range. Note that this is in the spec but not currently implemented.
+“out_of_range_action”: Action to take when specified parameter is outside of the specified range. Options are “stop” or “warn”. Note that this is in the spec but only “stop” is currently implemented.
 * matchups
 ** notes
 *** defaults
