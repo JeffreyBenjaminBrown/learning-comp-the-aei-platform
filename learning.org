@@ -105,13 +105,11 @@ Does the "install instructions" section of the COMP readme indicate how to actua
 * ParamTools
 ** questions
 *** The schema for schemas
-Does every element of "dims" require a "type" and a "validators", and does every element of "optional" require a "type" and a "number_dims"? And are no other level-3 fields permissible in either position?
-*** can the shape of the (fixed-dimension) output value grid of a parameter vary across input vectors?
-*** optional dimensions can have dimension zero?
- e.g. from the the example at
-     https://paramtools.readthedocs.io/en/latest/spec.html#specification-schema
- there's
-     "section_3": {"type": "str", "number_dims": 0},
+**** DONE Every element of "dims" requires a "type" and a "validators".
+**** DONE Every element of "optional" requires a "type" and a "number_dims". 
+**** TODO Are no other level-3 fields permissible in either position?
+*** DONE Across input vectors, the output value grid of a parameter should have a constant shape.
+This is a stronger condition than having a constant dimension.
 *** what is array_first?
 And why is it both global to the Parameters class (#1 below) and local to a particular instance of Parameters (#2 below)?
 
@@ -120,7 +118,14 @@ class Parameters:
     array_first = False # 1
 
     def __init__( self, initial_state=None ... # 2
-
-*** how can a schema (e.g. behresp) have no dimensions, yet default values?
-*** what are parameter attributes
-They appear to be distinct from parameter values -- c.f. the definition of specification() in ParamTools/paramtools/parameters.py
+*** DONE how can a schema (e.g. behresp) have no dimensions, yet default values?
+defaults.json defines "dimensions", which are inputs to parameters.
+schema.json defines "parameters".
+*** DONE ? stale
+**** (What was my question?) Optional dimensions can have dimension zero?
+e.g. from the the example at
+    https://paramtools.readthedocs.io/en/latest/spec.html#specification-schema
+there's
+    "section_3": {"type": "str", "number_dims": 0},
+**** what are parameter attributes
+ They appear to be distinct from parameter values -- c.f. the definition of specification() in ParamTools/paramtools/parameters.py
